@@ -8,13 +8,18 @@ import generateToken from "../utils/generateToken.js";
 const authUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-  const matchState = user.matchPassword(password);
   if (!user || !user.matchPassword(password)) {
     res.statusCode = 400;
     return next(new Error("incorrect email or password"));
   }
 
-  res.status(200).json({ message: "user authorized..." });
+  // revmove the password field.
+  delete user._doc.password;
+  generateToken(res, user._id);
+  res.status(200).json({
+    message: "success",
+    user,
+  });
 });
 
 //@Desc   Register user
@@ -59,7 +64,7 @@ const logoutUser = asyncHandler(async (req, res, next) => {
 //@route  GET /api/v1/auth/users/profile
 //@access Public
 const getUserProfile = asyncHandler(async (req, res, next) => {
-  res.status(200).json({ message: "get user profile..." });
+  res.status(200).json({ message: "success", userData: req.user });
 });
 
 //@Desc   Update user profile
