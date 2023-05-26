@@ -1,5 +1,4 @@
 import { Router } from "express";
-const router = Router();
 
 import {
   authUser,
@@ -8,6 +7,8 @@ import {
   registerUser,
   updateUserProfile,
 } from "../controllers/userController.js";
+
+const router = Router();
 
 router.post("/", authUser);
 router.post("/users", registerUser);
