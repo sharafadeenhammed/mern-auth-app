@@ -26,10 +26,8 @@ UserSchema.pre("save", async function (req, res, next) {
   this.password = bcrypt.hashSync(this.password, salt);
 });
 
-UserSchema.methods.matchPassword = async function (password) {
-  const hashPass = this.password;
-  console.log(password, hashPass);
-  return await bcrypt.compare(password, this.password);
+UserSchema.methods.matchPassword = function (password) {
+  return bcrypt.compareSync(password, this.password);
 };
 
 const User = mongoose.model("user", UserSchema);

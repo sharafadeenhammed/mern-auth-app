@@ -1,5 +1,5 @@
 import { Router } from "express";
-
+import { protect } from "../controllers/protect.js";
 import {
   authUser,
   getUserProfile,
@@ -13,6 +13,6 @@ const router = Router();
 router.post("/", authUser);
 router.post("/users", registerUser);
 router.post("/logout", logoutUser);
-router.route("/profile").get(getUserProfile).put(updateUserProfile);
+router.route("/profile").get(protect, getUserProfile).put(updateUserProfile);
 
 export default router;

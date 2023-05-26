@@ -2,7 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import colors from "colors";
 import dotenv from "dotenv";
-import cookie from "cookie-parser";
+import cookies from "cookie-parser";
 // load enviroment variables...
 dotenv.config();
 const PORT = process.env.NODE_PORT || 5000;
@@ -26,14 +26,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // mounting cookie parser
-app.use(cookie());
+app.use(cookies());
 
 app.use("/api/v1/auth", userRoutes);
-
-// app.get("/api/v1/get", async (req, res, next) => {
-//   const data = await User.find();
-//   res.json(data);
-// });
 
 app.use(notFound, errorHandeler);
 

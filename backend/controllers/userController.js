@@ -8,11 +8,12 @@ import generateToken from "../utils/generateToken.js";
 const authUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
-  console.log(user);
-  if (!user || user.matchPassword(password)) {
+  const matchState = user.matchPassword(password);
+  if (!user || !user.matchPassword(password)) {
     res.statusCode = 400;
-    next("incorrect email or password");
+    return next(new Error("incorrect email or password"));
   }
+
   res.status(200).json({ message: "user authorized..." });
 });
 
