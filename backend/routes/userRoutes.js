@@ -13,6 +13,9 @@ const router = Router();
 router.post("/", authUser);
 router.post("/users", registerUser);
 router.post("/logout", logoutUser);
-router.route("/profile").get(protect, getUserProfile).put(updateUserProfile);
+router
+  .route("/profile")
+  .get(protect, getUserProfile)
+  .put(protect, updateUserProfile);
 
 export default router;

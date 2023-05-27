@@ -15,15 +15,18 @@ const UserSchema = mongoose.Schema(
       type: String,
       required: [true, "please include a password field"],
       minLength: 8,
+      select: false,
     },
   },
   { timestamps: true }
 );
 
 UserSchema.pre("save", async function (req, res, next) {
-  if (!this.isModified("password")) next();
+  console.log("processing password", this.password);
+  // if (!this.isModified("password") || this.password == undefined) next();
   const salt = bcrypt.genSaltSync(10);
   this.password = bcrypt.hashSync(this.password, salt);
+  // next();
 });
 
 UserSchema.methods.matchPassword = function (password) {

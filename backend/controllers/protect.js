@@ -6,10 +6,11 @@ asyncHandeler;
 const protect = asyncHandeler(async (req, res, next) => {
   const cookie = req.cookies?.jwt;
   if (!cookie) {
-    return next(new Error("unauthorized to access this route"));
+    res.statusCode = 401;
+    return next(new Error("unauthorized to access this route (No Token)"));
   }
   const token = jwt.verify(cookie, process.env.JWT_SECRET);
-  const user = await User.findById(token.userId).select("-password");
+  const user = await User.findById(token.userId);
   req.user = user;
   next();
 });

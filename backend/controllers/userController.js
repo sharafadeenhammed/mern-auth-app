@@ -7,7 +7,7 @@ import generateToken from "../utils/generateToken.js";
 //@access Public
 const authUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email }).select("+password");
   if (!user || !user.matchPassword(password)) {
     res.statusCode = 400;
     return next(new Error("incorrect email or password"));
@@ -57,7 +57,15 @@ const registerUser = asyncHandler(async (req, res, next) => {
 //@route  POST /api/v1/auth/users/register
 //@access Public
 const logoutUser = asyncHandler(async (req, res, next) => {
-  res.status(200).json({ message: "logout user..." });
+  res
+    .cookie("jwt", "", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "developement",
+      expires: new Date(0),
+    })
+    .status(200)
+    .json({ message: "logout user..." });
+  console.log(new Date(0));
 });
 
 //@Desc   Get user profile
@@ -71,7 +79,22 @@ const getUserProfile = asyncHandler(async (req, res, next) => {
 //@route  PUT /api/v1/auth/users/profile
 //@access Private
 const updateUserProfile = asyncHandler(async (req, res, next) => {
-  res.status(200).json({ message: "update user profile..." });
+  const { name, email, password } = req.body;
+  const user = await User.findById(req.user._id);
+  user.name = name || user.name;
+  user.email = email || user.email;
+  if (password !== "") {
+    user.password = password || user.password;
+  }
+  await user.save();
+  res.status(200).json({
+    message: "success",
+    updatedData: {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+    },
+  });
 });
 
 export {
