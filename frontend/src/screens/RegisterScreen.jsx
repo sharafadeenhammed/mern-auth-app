@@ -26,7 +26,7 @@ const RegisterScreen = () => {
           />
         </Form.Group>
 
-        <Form.Group className="my-4" controlId="email">
+        <Form.Group className="my-2" controlId="email">
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type="email"
@@ -44,7 +44,7 @@ const RegisterScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group className="py-4" controlId="confirmPassword">
+        <Form.Group className="py-2" controlId="confirmPassword">
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type="password"
@@ -61,8 +61,8 @@ const RegisterScreen = () => {
 
         <Row className="py-3">
           <Col>
-            New Customer? &nbsp;
-            <Link to="/register">Register</Link>
+            Already Have An Account? &nbsp;
+            <Link to="/login">Login</Link>
           </Col>
         </Row>
       </Form>
