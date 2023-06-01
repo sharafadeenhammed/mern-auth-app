@@ -21,12 +21,13 @@ const UserSchema = mongoose.Schema(
   { timestamps: true }
 );
 
-UserSchema.pre("save", async function (req, res, next) {
-  console.log("processing password", this.password);
-  // if (!this.isModified("password") || this.password == undefined) next();
+UserSchema.pre("save", async function (next) {
+  if (!this.isModified("password") || this.password == undefined) {
+    return next();
+  }
   const salt = bcrypt.genSaltSync(10);
   this.password = bcrypt.hashSync(this.password, salt);
-  // next();
+  next();
 });
 
 UserSchema.methods.matchPassword = function (password) {

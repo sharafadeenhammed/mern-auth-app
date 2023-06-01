@@ -33,5 +33,5 @@ app.use("/api/v1/auth", userRoutes);
 app.use(notFound, errorHandeler);
 
 app.listen(PORT, () => {
-  console.log(`app runnning on port ${PORT}`.blue.underline.inverse);
+  console.log(`server runnning on port ${PORT}`.blue.underline.inverse);
 });

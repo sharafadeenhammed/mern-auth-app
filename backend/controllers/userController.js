@@ -81,10 +81,11 @@ const getUserProfile = asyncHandler(async (req, res, next) => {
 const updateUserProfile = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
   const user = await User.findById(req.user._id);
+  if (!user) return next(new Error("user profile not found"));
   user.name = name || user.name;
   user.email = email || user.email;
-  if (password !== "") {
-    user.password = password || user.password;
+  if (password !== "" && password !== undefined) {
+    user.password = password;
   }
   await user.save();
   res.status(200).json({

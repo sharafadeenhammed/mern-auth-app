@@ -6,8 +6,10 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon ./backend/server.js",
-    "start": "node ./backend/server.js"
+    "server": "nodemon ./backend/server.js",
+    "start": "node ./backend/server.js",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\"  \"npm run client\""
   },
   "author": "",
   "license": "ISC",
@@ -21,6 +23,7 @@
   },
   "devDependencies": {
     "colors": "^1.4.0",
+    "concurrently": "^8.0.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.22"
   }
