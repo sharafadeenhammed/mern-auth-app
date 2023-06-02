@@ -8,6 +8,8 @@ import {
 } from "react-router-dom";
 import App from "./App.jsx";
 import "./index.css";
+import store from "../store.js";
+import { Provider } from "react-redux";
 import HomeScreen from "./screens/HomeScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
@@ -26,7 +28,8 @@ const routes = createBrowserRouter(
 // mountin spa to the root element...
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    {/* <App /> */}
-    <RouterProvider router={routes} />
+    <Provider store={store}>
+      <RouterProvider router={routes} />
+    </Provider>
   </React.StrictMode>
 );
