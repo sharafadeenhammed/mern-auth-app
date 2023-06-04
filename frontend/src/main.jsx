@@ -6,10 +6,11 @@ import {
   Route,
   createRoutesFromElements,
 } from "react-router-dom";
+import store from "./store.js";
+import { Provider } from "react-redux";
+import { UserContextProvider } from "./context/UserContext.jsx";
 import App from "./App.jsx";
 import "./index.css";
-import store from "../store.js";
-import { Provider } from "react-redux";
 import HomeScreen from "./screens/HomeScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
@@ -28,8 +29,8 @@ const routes = createBrowserRouter(
 // mountin spa to the root element...
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Provider store={store}>
+    <UserContextProvider>
       <RouterProvider router={routes} />
-    </Provider>
+    </UserContextProvider>
   </React.StrictMode>
 );
