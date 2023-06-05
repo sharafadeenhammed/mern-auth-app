@@ -1,8 +1,9 @@
+import { setLocalStorage } from "./userActions";
 const userReducer = (state, action) => {
   const key = "login";
-  switch (key) {
-    case "login":
-      console.log(state, "login user...");
+  switch (action.type) {
+    case "setLocalStorage":
+      setLocalStorage(action.payload);
       return { ...state };
       break;
 

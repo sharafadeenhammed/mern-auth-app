@@ -7,11 +7,17 @@ const UserContextProvider = ({ children }) => {
     localStorage.getItem("userData") &&
     JSON.parse(localStorage.getItem("userData"));
   const [state, userDispatch] = useReducer(userReducer, { userData });
+  const setUserDispatcher = (type, payload) => {
+    userDispatch({
+      type: type,
+      payload: payload,
+    });
+  };
   return (
     <UserContext.Provider
       value={{
         user: state,
-        userDispatch: userDispatch,
+        setUserDispatcher: setUserDispatcher,
       }}
     >
       {children}

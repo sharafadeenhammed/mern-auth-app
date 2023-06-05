@@ -2,6 +2,7 @@ import express from "express";
 import morgan from "morgan";
 import colors from "colors";
 import dotenv from "dotenv";
+import cors from "cors";
 import cookies from "cookie-parser";
 // load enviroment variables...
 dotenv.config();
@@ -17,6 +18,9 @@ const app = express();
 
 //connet to database...
 connectDb();
+
+// mounting cors
+app.use(cors({ origin: "*" }));
 
 // mounting morgan middleware for developement...
 app.use(morgan("dev"));

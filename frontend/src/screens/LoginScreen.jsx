@@ -1,13 +1,36 @@
 import FormContainer from "../components/FormContainer";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { toast } from "react-toastify";
+import UserContext from "../context/UserContext";
 import { Form, Button, Row, Col } from "react-bootstrap";
 const LoginScreen = () => {
+  const { setUserDispatcher } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const submitHandeler = (e) => {
+  const submitHandeler = async (e) => {
     e.preventDefault();
-    console.log("\n", email, password);
+    try {
+      const req = await fetch(`${import.meta.env.VITE_BASE_URL}/auth`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({ email, password }),
+      });
+      const json = await req.json();
+
+      if (json.message === "success") {
+        toast.success(`welcome ${json.user.name}`);
+        setUserDispatcher("setLocalStorage", json.user);
+      } else {
+        toast.error(`${json.message}`);
+      }
+    } catch (err) {
+      console.log(err);
+      toast.error(`Can't log you in`);
+    }
   };
   return (
     <FormContainer>
@@ -18,7 +41,7 @@ const LoginScreen = () => {
           <Form.Control
             type="email"
             placeholder="Enter Email"
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.trim())}
           ></Form.Control>
         </Form.Group>
         <Form.Group className="my-2" controlId="password">

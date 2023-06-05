@@ -3,7 +3,7 @@ import User from "../models/UserModel.js";
 import generateToken from "../utils/generateToken.js";
 
 //@Desc   Auth user/set token
-//@route  POST /api/v1/auth/users/auth
+//@route  POST /api/v1/auth
 //@access Public
 const authUser = asyncHandler(async (req, res, next) => {
   const { email, password } = req.body;
@@ -23,7 +23,7 @@ const authUser = asyncHandler(async (req, res, next) => {
 });
 
 //@Desc   Register user
-//@route  POST /api/v1/auth/users/register
+//@route  POST /api/v1/auth/users
 //@access Public
 const registerUser = asyncHandler(async (req, res, next) => {
   const { name, email, password } = req.body;
@@ -54,7 +54,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
 });
 
 //@Desc   Logout user
-//@route  POST /api/v1/auth/users/register
+//@route  POST /api/v1/auth/logout
 //@access Public
 const logoutUser = asyncHandler(async (req, res, next) => {
   res
@@ -64,7 +64,7 @@ const logoutUser = asyncHandler(async (req, res, next) => {
       expires: new Date(0),
     })
     .status(200)
-    .json({ message: "logout user..." });
+    .json({ message: "success" });
   console.log(new Date(0));
 });
 
