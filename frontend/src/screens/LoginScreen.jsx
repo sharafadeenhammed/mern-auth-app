@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import UserContext from "../context/UserContext";
 import { Form, Button, Row, Col } from "react-bootstrap";
 const LoginScreen = () => {
-  const { setUserDispatcher } = useContext(UserContext);
+  const { userDispatchReducer } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const submitHandeler = async (e) => {
@@ -23,7 +23,7 @@ const LoginScreen = () => {
 
       if (json.message === "success") {
         toast.success(`welcome ${json.user.name}`);
-        setUserDispatcher("setLocalStorage", json.user);
+        userDispatchReducer("setLocalStorage", json.user);
       } else {
         toast.error(`${json.message}`);
       }

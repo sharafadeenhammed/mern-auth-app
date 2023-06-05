@@ -1,13 +1,12 @@
 import { createContext, useReducer } from "react";
 import userReducer from "../userActions/userReducer";
+import { getUserFromLocalStorage } from "../userActions/userActions";
 const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
-  const userData =
-    localStorage.getItem("userData") &&
-    JSON.parse(localStorage.getItem("userData"));
+  const userData = getUserFromLocalStorage();
   const [state, userDispatch] = useReducer(userReducer, { userData });
-  const setUserDispatcher = (type, payload) => {
+  const userDispatchReducer = (type, payload) => {
     userDispatch({
       type: type,
       payload: payload,
@@ -17,7 +16,7 @@ const UserContextProvider = ({ children }) => {
     <UserContext.Provider
       value={{
         user: state,
-        setUserDispatcher: setUserDispatcher,
+        userDispatchReducer,
       }}
     >
       {children}
