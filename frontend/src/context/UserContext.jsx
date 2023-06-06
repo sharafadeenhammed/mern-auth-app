@@ -15,7 +15,7 @@ const UserContextProvider = ({ children }) => {
   return (
     <UserContext.Provider
       value={{
-        user: state,
+        userData: state,
         userDispatchReducer,
       }}
     >

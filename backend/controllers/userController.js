@@ -14,7 +14,7 @@ const authUser = asyncHandler(async (req, res, next) => {
   }
 
   // revmove the password field.
-  delete user._doc.password;
+  delete user?._doc.password;
   generateToken(res, user._id);
   res.status(200).json({
     message: "success",

@@ -1,14 +1,23 @@
 import FormContainer from "../components/FormContainer";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { toast } from "react-toastify";
 import UserContext from "../context/UserContext";
 import { Form, Button, Row, Col } from "react-bootstrap";
 const LoginScreen = () => {
-  const { userDispatchReducer } = useContext(UserContext);
+  const {
+    userDispatchReducer,
+    userData: { userData },
+  } = useContext(UserContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (userData) {
+      navigate("/");
+    }
+  }, [userData]);
   const submitHandeler = async (e) => {
     e.preventDefault();
     try {
@@ -24,6 +33,7 @@ const LoginScreen = () => {
       if (json.message === "success") {
         toast.success(`welcome ${json.user.name}`);
         userDispatchReducer("setLocalStorage", json.user);
+        navigate("/");
       } else {
         toast.error(`${json.message}`);
       }
