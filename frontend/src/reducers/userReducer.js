@@ -1,4 +1,4 @@
-import { setLocalStorage } from "./userActions";
+import { setLocalStorage } from "../actions/userActions";
 const userReducer = (state, action) => {
   switch (action.type) {
     case "setLocalStorage":

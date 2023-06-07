@@ -1,6 +1,6 @@
 import { createContext, useReducer } from "react";
-import userReducer from "../userActions/userReducer";
-import { getUserFromLocalStorage } from "../userActions/userActions";
+import userReducer from "../reducers/userReducer";
+import { getUserFromLocalStorage } from "../actions/userActions";
 const UserContext = createContext();
 
 const UserContextProvider = ({ children }) => {
