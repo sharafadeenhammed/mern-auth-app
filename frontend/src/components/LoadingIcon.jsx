@@ -21,8 +21,8 @@ function LoadingIcon({ size }) {
     },
   };
   return (
-    <Container style={style[size || small]}>
-      <img src={image} alt="" />
+    <Container className="mx-auto py-5" style={style[size || small]}>
+      <img style={style[size || small]} src={image} alt="" />
     </Container>
   );
 }
