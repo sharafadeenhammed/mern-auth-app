@@ -12,15 +12,18 @@ const PORT = process.env.NODE_PORT || 5000;
 import userRoutes from "./routes/userRoutes.js";
 import { errorHandeler, notFound } from "./midddleware/errorHandeler.js";
 import connectDb from "./config/db.js";
-import User from "./models/UserModel.js";
-
 const app = express();
 
 //connet to database...
 connectDb();
 
 // mounting cors
-app.use(cors({ origin: "*" }));
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 
 // mounting morgan middleware for developement...
 app.use(morgan("dev"));

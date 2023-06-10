@@ -1,7 +1,7 @@
 import image from "../assets/spinner.gif";
 import { Container } from "react-bootstrap";
 
-function LoadingIcon({ size }) {
+function LoadingIcon({ size, position }) {
   const style = {
     large: {
       height: "100px",
@@ -19,9 +19,17 @@ function LoadingIcon({ size }) {
       height: "10px",
       width: "10px",
     },
+    center: {
+      position: "fixed",
+      top: "50%",
+      left: "50%",
+    },
   };
   return (
-    <Container className="mx-auto py-5" style={style[size || small]}>
+    <Container
+      style={position && style[position]}
+      className={position ? "" : "mx-auto py-5"}
+    >
       <img style={style[size || small]} src={image} alt="" />
     </Container>
   );

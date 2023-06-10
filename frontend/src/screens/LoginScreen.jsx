@@ -26,13 +26,14 @@ const LoginScreen = () => {
     try {
       const req = await fetch(`${import.meta.env.VITE_BASE_URL}/auth`, {
         method: "POST",
+        credentials: "include",
         headers: {
           "content-type": "application/json",
         },
         body: JSON.stringify({ email, password }),
       });
       const json = await req.json();
-
+      console.log(req.type);
       if (json.message === "success") {
         toast.success(`welcome ${json.user.name}`);
         userDispatchReducer("setLocalStorage", json.user);
@@ -48,7 +49,7 @@ const LoginScreen = () => {
     }
   };
   return (
-    (isLoading && <LoadingIcon size="medium" />) || (
+    (isLoading && <LoadingIcon size="medium" position="center" />) || (
       <FormContainer>
         <h1>Sign In</h1>
         <Form onSubmit={submitHandeler}>
@@ -57,6 +58,7 @@ const LoginScreen = () => {
             <Form.Control
               type="email"
               placeholder="Enter Email"
+              value={email}
               onChange={(e) => setEmail(e.target.value.trim())}
             ></Form.Control>
           </Form.Group>
@@ -64,6 +66,7 @@ const LoginScreen = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
+              value={password}
               placeholder="Enter Password"
               onChange={(e) => setPassword(e.target.value)}
             ></Form.Control>
