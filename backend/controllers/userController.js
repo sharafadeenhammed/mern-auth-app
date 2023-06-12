@@ -65,7 +65,6 @@ const logoutUser = asyncHandler(async (req, res, next) => {
     })
     .status(200)
     .json({ message: "success" });
-  console.log(new Date(0));
 });
 
 //@Desc   Get user profile

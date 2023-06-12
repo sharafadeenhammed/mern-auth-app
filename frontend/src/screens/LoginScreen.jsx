@@ -33,7 +33,6 @@ const LoginScreen = () => {
         body: JSON.stringify({ email, password }),
       });
       const json = await req.json();
-      console.log(req.type);
       if (json.message === "success") {
         toast.success(`welcome ${json.user.name}`);
         userDispatchReducer("setLocalStorage", json.user);

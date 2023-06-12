@@ -6,4 +6,12 @@ const getUserFromLocalStorage = () => {
   return JSON.parse(localStorage.getItem("userData"));
 };
 
-export { setLocalStorage, getUserFromLocalStorage };
+const clearUserDataFromLocalStorage = () => {
+  localStorage.removeItem("userData");
+};
+
+export {
+  setLocalStorage,
+  getUserFromLocalStorage,
+  clearUserDataFromLocalStorage,
+};
