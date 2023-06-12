@@ -43,13 +43,10 @@ const registerUser = asyncHandler(async (req, res, next) => {
     res.statusCode = 400;
     throw "invalid user data...";
   }
-
+  delete user._doc.password;
   generateToken(res, user._id);
   res.status(201).json({
-    message: "success",
-    _id: user._id,
-    name,
-    email,
+    user,
   });
 });
 

@@ -28,7 +28,6 @@ const Header = () => {
       });
       if (!req.ok) throw "error";
       const json = await req.json();
-      console.log("json:", json);
       userDispatchReducer("logout", {});
       toast.success("logged out succesful");
       navigate("/");
