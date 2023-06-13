@@ -14,6 +14,8 @@ import "./index.css";
 import HomeScreen from "./screens/HomeScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
+import PrivateRoute from "./components/PrivateRoute.jsx";
+import Profile from "./screens/Profile.jsx";
 
 // creating route handeler...
 const routes = createBrowserRouter(
@@ -23,6 +25,9 @@ const routes = createBrowserRouter(
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="/*" element={<h1>404 not found</h1>} />
+      <Route path="">
+        <Route path="/profile" element={<Profile />}></Route>
+      </Route>
     </Route>
   )
 );
