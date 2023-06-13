@@ -2,7 +2,7 @@
 
 ## 1.) Run npm install on the root to install all developement and production dependencies for the backend.
 
-## 2.) on the root folder creae a .env file and add the following variables.
+## 2.) on the root folder create a .env file and add the following variables.
 
 1. NODE_ENV = // value sohould be either developement or production which is used to configure the mode.
 2. NODE_PORT = // an number you want your server to be running on for me it is 5000.
