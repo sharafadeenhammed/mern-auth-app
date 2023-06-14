@@ -25,9 +25,7 @@ const routes = createBrowserRouter(
       <Route path="/login" element={<LoginScreen />} />
       <Route path="/register" element={<RegisterScreen />} />
       <Route path="/*" element={<h1>404 not found</h1>} />
-      <Route path="">
-        <Route path="/profile" element={<Profile />}></Route>
-      </Route>
+      <Route path="/profile" element={<Profile />}></Route>
     </Route>
   )
 );
