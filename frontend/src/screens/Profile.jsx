@@ -11,7 +11,6 @@ const Profile = () => {
     userData: { userData },
   } = useContext(UserContext);
   const navigate = useNavigate();
-  console.log(userData);
   if (!userData) {
     return <Navigate to="/" />;
   }
@@ -42,7 +41,6 @@ const Profile = () => {
       userDispatchReducer("setLocalStorage", data.updatedData);
       toast.success(`profile updated sucesfully.`);
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
     }
     setIsLoading(false);

@@ -14,7 +14,6 @@ import "./index.css";
 import HomeScreen from "./screens/HomeScreen.jsx";
 import LoginScreen from "./screens/LoginScreen.jsx";
 import RegisterScreen from "./screens/RegisterScreen.jsx";
-import PrivateRoute from "./components/PrivateRoute.jsx";
 import Profile from "./screens/Profile.jsx";
 
 // creating route handeler...

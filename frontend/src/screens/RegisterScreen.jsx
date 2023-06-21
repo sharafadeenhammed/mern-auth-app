@@ -32,14 +32,12 @@ const RegisterScreen = () => {
       });
       const data = await res.json();
       if (!res.ok) throw data;
-      console.log(data);
       userDispatchReducer("setLocalStorage", data.user);
       navigate("/");
       toast.success(
         `congratulations ${data.user.name} your account is succesfully registered.`
       );
     } catch (error) {
-      console.log(error);
       toast.error(error.message);
     }
     setIsLoading(false);

@@ -42,7 +42,6 @@ const LoginScreen = () => {
         setIsLoading(false);
       }
     } catch (err) {
-      console.log(err);
       toast.error(`Can't log you in`);
       setIsLoading(false);
     }
